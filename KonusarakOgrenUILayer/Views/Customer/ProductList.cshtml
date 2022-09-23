@@ -1,0 +1,105 @@
+﻿@model List<KonusarakOgrenUILayer.DTO.ProductListDTO>
+@{
+    ViewBag.Title = "Ürün Listesi | Konuşarak Öğren";
+    Layout = "_Layout";
+}
+
+@section Styles{
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#employeeListDataTable').DataTable();
+        });
+    </script>
+    <script>
+     $(function () {
+         var PlaceHolderElement = $('#PlaceHolderHere');
+         $('button[data-toggle="ajax-modal"]').click(function (event)
+         {
+            var url = $(this).data('url');
+            $.get(url).done(function (data) {
+               PlaceHolderElement.html(data);
+               PlaceHolderElement.find('.modal').modal('show');
+                }
+                )
+                
+         })
+         PlaceHolderElement.on('click', '[data-save="modal"]', function (event) {
+             var form = $(this).parents('.modal').find('form');
+             var actionUrl = form.attr('action');
+             var sendData = form.serialize();
+             $.post(actionUrl,sendData).done(function(data){
+             PlaceHolderElement.find('.modal').modal('hide');    
+             })
+         })
+     })
+    </script>
+}
+
+<div id="PlaceHolderHere"></div>
+<section>
+    <div id="accordion" style="margin: 20px;">
+       
+        <div class="card shadow mt-5">
+            <div class="card-header bg-gradient-gray-dark">
+                                        <h3 class="card-title">
+                                            Ürün Listesi
+                                        </h3>
+                                    </div>
+            <div id="collapseCompanyList" class="collapse show">
+                <div class="card-body">
+                    <div class="row table-responsive-sm">
+                        <div class="col-md-12 ">
+                            <table id="employeeListDataTable" class="display" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Ürün Açıklaması</th>
+                                    <th>Ürün Rengi</th>
+                                    <th>Ürün Boyutu</th>
+                                    <th>Ürün Kategorisi</th>
+                                    <th>Ürün Markası</th>
+                                    <th>Ürün Fiyatı</th>
+                                    <th>Ürün İndirim Oranı</th>
+                                    <th>Ürün Oluşturulma Tarihi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                              
+                                    
+                                       @foreach (var item in Model)
+                                       {
+                                           <tr>
+                                               <td>@item.ID</td>
+                                               <td>@item.Name</td>
+                                               <td>@item.Description</td>
+                                               <td>@item.Color</td>
+                                               <td>@item.Size</td>
+                                               <td>@item.CategoryName</td>
+                                               <td>@item.BrandName</td>
+                                               <td>@item.Price</td>
+                                               <td>@item.DiscountPercante</td>
+                                               <td>@DateTime.Now.ToString(item.CreatedDate.ToString())</td>
+                                           </tr>
+                                       }
+                                    
+                                
+                                </tbody>
+                            </table>
+                        
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

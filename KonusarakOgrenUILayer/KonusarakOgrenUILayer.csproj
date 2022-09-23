@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\KonusarakOgren.Data\KonusarakOgren.Data.csproj" />
+      <ProjectReference Include="..\KonusarakOgren.Core\KonusarakOgren.Core.csproj" />
+      <ProjectReference Include="..\KonusarakOgren.Service\KonusarakOgren.Service.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
+      <PackageReference Include="AutoMapper" Version="11.0.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <TypeScriptCompile Include="wwwroot\js\daypilot\daypilot-all.min.d.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\AdminContoller\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AdminContoller\ProductList.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages" />
+    </ItemGroup>
+
+</Project>
